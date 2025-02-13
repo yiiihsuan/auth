@@ -22,7 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         security = @SecurityRequirement(name = "bearerAuth")
 
 )
-
 @SecurityScheme(
         name = "bearerAuth",
         scheme = "bearer",
@@ -40,7 +39,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth->auth
-                        .requestMatchers("/api/auth/login","/api/auth/register","/swagger-ui/**","/v3/api-docs/**").permitAll()
+                        .requestMatchers("/api/auth/login","/api/auth/register","/api/auth/refresh","/swagger-ui/**","/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

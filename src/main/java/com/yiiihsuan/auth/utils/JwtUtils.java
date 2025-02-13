@@ -21,7 +21,7 @@ public class JwtUtils {
 
     private SecretKey KEY;
     public static final long ACCESS_TOKEN_EXPIRATION = 15 * 60 * 1000; // 15 分鐘
-    private static final long REFRESH_TOKEN_EXPIRATION = 7 * 24 * 60 * 60 * 1000; // 7 天
+    public static final long REFRESH_TOKEN_EXPIRATION = 7 * 24 * 60 * 60 * 1000; // 7 天
 
     @PostConstruct
     public void init() {

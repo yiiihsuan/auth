@@ -1,0 +1,11 @@
+# 使用官方 Redis 映像
+FROM redis:latest
+
+# 設定工作目錄
+WORKDIR /usr/local/etc/redis
+
+# 暴露 Redis 端口
+EXPOSE 6379
+
+# 啟動 Redis（不指定配置文件，使用預設值）
+CMD ["redis-server"]
