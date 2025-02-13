@@ -1,8 +1,10 @@
 package com.yiiihsuan.auth.controller;
 
 import com.yiiihsuan.auth.controller.request.MemberLoginRequest;
+import com.yiiihsuan.auth.controller.request.RefreshTokenRequest;
 import com.yiiihsuan.auth.controller.response.TokenResponse;
 import com.yiiihsuan.auth.service.MemberLoginService;
+import com.yiiihsuan.auth.service.TokenRefreshService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +22,13 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login(@RequestBody MemberLoginRequest input) {
         return ResponseEntity.ok(memberLoginService.request(input));
+    }
+
+    private final TokenRefreshService tokenRefreshService;
+
+    @PostMapping("/refresh")
+    public ResponseEntity<TokenResponse> refresh(@RequestBody RefreshTokenRequest input) {
+        return ResponseEntity.ok(tokenRefreshService.request(input));
     }
 
 }

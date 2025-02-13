@@ -24,12 +24,17 @@ public class MemberLoginService {
         String accessToken = jwtUtils.generateAccessToken(memberDto.getId());
         String refreshToken = jwtUtils.generateRefreshToken(memberDto.getId());
 
-        TokenResponse res = new TokenResponse();
-        res.setAccessToken(accessToken);
-        res.setRefreshToken(refreshToken);
-        res.setExpiresIn(jwtUtils.ACCESS_TOKEN_EXPIRATION/1000);
-        res.setTokenType("Bearer");
+//        TokenResponse res = new TokenResponse();
+//        res.setAccessToken(accessToken);
+//        res.setRefreshToken(refreshToken);
+//        res.setExpiresIn(jwtUtils.ACCESS_TOKEN_EXPIRATION/1000);
+//        res.setTokenType("Bearer");
 
-        return res;
+        return TokenResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .expiresIn(JwtUtils.ACCESS_TOKEN_EXPIRATION /1000)
+                .tokenType("Bearer")
+                .build();
     }
 }

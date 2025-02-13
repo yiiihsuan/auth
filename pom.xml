@@ -107,6 +107,58 @@
                     </excludes>
                 </configuration>
             </plugin>
+
+            <!-- JaCoCo 插件 -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.12</version>
+                <executions>
+                    <!-- 第一階段：在測試前配置 JaCoCo 探針 -->
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- 第二階段：測試後產生報告 -->
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- 第三階段：驗證覆蓋率是否達到指定門檻 -->
+                    <execution>
+                        <id>check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <!-- 可檢查整個模組（BUNDLE）、套件（PACKAGE）、類別（CLASS）等 -->
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <!-- 要檢查哪些指標，如 LINE、INSTRUCTION、BRANCH 等 -->
+                                            <counter>LINE</counter>
+                                            <!-- 覆蓋率的檢視方式，如 COVEREDRATIO、MISSEDRATIO 等 -->
+                                            <value>COVEREDRATIO</value>
+                                            <!-- 設定最小要求，如 0.85 等於 85% -->
+                                            <minimum>0.85</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
